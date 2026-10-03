@@ -1,0 +1,47 @@
+# 新玩家第一次進入時，依編號順序把禮包發到身上。
+# appearance：BUNDLE 束口袋。contents 由上到下就是由左至右的取出順序。
+# 束口袋不能再放入。開始取出後依 time 倒數，時間到或內容取完，束口袋消失。
+# time 寫法與 config-item.yml 相同。省略時是 30d。
+# amount 省略時是 1。一組是 64。
+# enchants 是該物品原本就能附上的附魔與等級。
+# item 是 config-item.yml 的裝備編號，例如 "0022"。
+
+enabled: true
+
+packs:
+  "J0001":
+    name: "新手禮包"
+    appearance: BUNDLE
+    time: 30d
+    contents:
+      - material: IRON_HELMET
+        enchants:
+          RESPIRATION: 3
+          AQUA_AFFINITY: 1
+          PROTECTION: 4
+          UNBREAKING: 3
+          MENDING: 1
+      - material: IRON_CHESTPLATE
+        enchants:
+          PROTECTION: 4
+          UNBREAKING: 3
+          MENDING: 1
+      - material: IRON_LEGGINGS
+        enchants:
+          PROTECTION: 4
+          UNBREAKING: 3
+          MENDING: 1
+      - material: IRON_BOOTS
+        enchants:
+          FEATHER_FALLING: 4
+          DEPTH_STRIDER: 3
+          PROTECTION: 4
+          UNBREAKING: 3
+          MENDING: 1
+      - item: "0022"
+      - item: "0023"
+      - item: "0024"
+      - material: BREAD
+        amount: 64
+      - material: TORCH
+        amount: 64

@@ -1,0 +1,8 @@
+.tools/
+.build/
+/target/
+/out/
+/dist/
+*.class
+/*.url
+/*.zip

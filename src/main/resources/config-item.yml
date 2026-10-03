@@ -1,0 +1,339 @@
+# 自訂裝備。編號請加引號，例如 "0001"。
+# base：插件移除後留下的物品材質。appearance：外觀材質，只套用物品模型。
+# time：permanent（永久）、30d 或 30天（第一次挖方塊後開始倒數）、2026/10/10（第一次使用後開始，台北時間當天結束前有效）。
+# durability：最大耐久，會寫進說明，並真的會消耗。
+# function.type=face：不管挖到哪一面，都只挖那一面的一層。size 是邊長，必須是正奇數，3 代表 3×3×1，挖到的那格在正中心。
+# 也可改寫 range 當半徑；1 同樣是 3×3×1。size 與 range 同時存在時採用 size。
+# function.type=forward：挖到的那格是底邊正中，沿玩家面向往前鋪一層平面。width 是左右，depth 是往前，都必須是正奇數。
+# 3 與 3 代表往前的 3×3，只有一層。
+# function.type=none：沒有範圍破壞。穿上後開始倒數，用來做套裝。
+# enchants：該工具原本就能附上的附魔。插件移除後名稱與外觀會回到本體，這些附魔會留下。
+# 編號順序：永久、30天、試用。每一段都是工具在前、套裝在後。新手工具接在最後。
+
+items:
+  "0001":
+    name: "永久VIP幸運鎬"
+    base: NETHERITE_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: permanent
+    durability: 10000
+    enchants:
+      FORTUNE: 3
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+  "0002":
+    name: "永久VIP絲綢鎬"
+    base: NETHERITE_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: permanent
+    durability: 10000
+    enchants:
+      SILK_TOUCH: 1
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+  "0003":
+    name: "永久VIP鏟"
+    base: NETHERITE_SHOVEL
+    appearance: NETHERITE_SHOVEL
+    time: permanent
+    durability: 10000
+    enchants:
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: forward
+      width: 3
+      depth: 3
+  "0004":
+    name: "永久VIP獄髓頭盔"
+    base: NETHERITE_HELMET
+    appearance: NETHERITE_HELMET
+    time: permanent
+    durability: 10000
+    enchants:
+      RESPIRATION: 3
+      AQUA_AFFINITY: 1
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0005":
+    name: "永久VIP獄髓胸甲"
+    base: NETHERITE_CHESTPLATE
+    appearance: NETHERITE_CHESTPLATE
+    time: permanent
+    durability: 10000
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0006":
+    name: "永久VIP獄髓護腿"
+    base: NETHERITE_LEGGINGS
+    appearance: NETHERITE_LEGGINGS
+    time: permanent
+    durability: 10000
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0007":
+    name: "永久VIP獄髓靴子"
+    base: NETHERITE_BOOTS
+    appearance: NETHERITE_BOOTS
+    time: permanent
+    durability: 10000
+    enchants:
+      FEATHER_FALLING: 4
+      DEPTH_STRIDER: 3
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0008":
+    name: "30天-VIP幸運鎬"
+    base: DIAMOND_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: 30d
+    durability: 1000
+    enchants:
+      FORTUNE: 3
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+      depth: 3
+  "0009":
+    name: "30天-VIP絲綢鎬"
+    base: DIAMOND_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: 30d
+    durability: 1000
+    enchants:
+      SILK_TOUCH: 1
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+      depth: 3
+  "0010":
+    name: "30天-VIP鏟"
+    base: DIAMOND_SHOVEL
+    appearance: NETHERITE_SHOVEL
+    time: 30d
+    durability: 1000
+    enchants:
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: forward
+      width: 3
+      depth: 3
+  "0011":
+    name: "30天-VIP獄髓頭盔"
+    base: DIAMOND_HELMET
+    appearance: NETHERITE_HELMET
+    time: 30d
+    durability: 1000
+    enchants:
+      RESPIRATION: 3
+      AQUA_AFFINITY: 1
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0012":
+    name: "30天-VIP獄髓胸甲"
+    base: DIAMOND_CHESTPLATE
+    appearance: NETHERITE_CHESTPLATE
+    time: 30d
+    durability: 1000
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0013":
+    name: "30天-VIP獄髓護腿"
+    base: DIAMOND_LEGGINGS
+    appearance: NETHERITE_LEGGINGS
+    time: 30d
+    durability: 1000
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0014":
+    name: "30天-VIP獄髓靴子"
+    base: DIAMOND_BOOTS
+    appearance: NETHERITE_BOOTS
+    time: 30d
+    durability: 1000
+    enchants:
+      FEATHER_FALLING: 4
+      DEPTH_STRIDER: 3
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0015":
+    name: "試用-VIP幸運鎬"
+    base: IRON_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      FORTUNE: 3
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+  "0016":
+    name: "試用-VIP絲綢鎬"
+    base: IRON_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      SILK_TOUCH: 1
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+  "0017":
+    name: "試用-VIP鏟"
+    base: IRON_SHOVEL
+    appearance: NETHERITE_SHOVEL
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: forward
+      width: 3
+      depth: 3
+  "0018":
+    name: "試用-VIP獄髓頭盔"
+    base: IRON_HELMET
+    appearance: NETHERITE_HELMET
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      RESPIRATION: 3
+      AQUA_AFFINITY: 1
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0019":
+    name: "試用-VIP獄髓胸甲"
+    base: IRON_CHESTPLATE
+    appearance: NETHERITE_CHESTPLATE
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0020":
+    name: "試用-VIP獄髓護腿"
+    base: IRON_LEGGINGS
+    appearance: NETHERITE_LEGGINGS
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0021":
+    name: "試用-VIP獄髓靴子"
+    base: IRON_BOOTS
+    appearance: NETHERITE_BOOTS
+    time: "2999/01/01"
+    durability: 1000
+    enchants:
+      FEATHER_FALLING: 4
+      DEPTH_STRIDER: 3
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0022":
+    name: "新手-VIP幸運鎬"
+    base: IRON_PICKAXE
+    appearance: IRON_PICKAXE
+    time: 30d
+    durability: 1000
+    enchants:
+      FORTUNE: 3
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+  "0023":
+    name: "新手-VIP絲綢鎬"
+    base: IRON_PICKAXE
+    appearance: IRON_PICKAXE
+    time: 30d
+    durability: 1000
+    enchants:
+      SILK_TOUCH: 1
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+  "0024":
+    name: "新手-VIP鏟"
+    base: IRON_SHOVEL
+    appearance: IRON_SHOVEL
+    time: 30d
+    durability: 1000
+    enchants:
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: forward
+      width: 3
+      depth: 3

@@ -1,0 +1,10 @@
+language-format-version: 1
+
+console:
+  enabled: 'bm-minecraft-${feature} {version} 已啟用。'
+
+messages:
+  no-permission: '&a[bm-minecraft-${feature}] &c錯誤：&f你沒有使用此指令的權限。'
+  enabled: '&a[bm-minecraft-${feature}] &f功能已&e開啟。'
+  disabled: '&a[bm-minecraft-${feature}] &e警告：&f功能已&e關閉。'
+  reloaded: '&a[bm-minecraft-${feature}] &f設定與語系已重新載入。'

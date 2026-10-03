@@ -1,0 +1,4 @@
+# bm-minecraft-${feature} configuration
+
+# Enable or disable this plugin's feature.
+enabled: true

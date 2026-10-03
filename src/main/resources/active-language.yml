@@ -1,0 +1,2 @@
+# This value is set when a language-specific JAR is built.
+language: ${default.language}

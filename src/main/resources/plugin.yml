@@ -1,0 +1,22 @@
+name: bm-minecraft-vip
+version: "26.3_0.0.1"
+main: bm.minecraft.vip.BmMinecraftVipPlugin
+api-version: '26.3'
+description: "Minecraft VIP。"
+authors:
+  - "[B.M] 圓周率™3.14"
+website: "http://exnormal.com:81/"
+
+commands:
+  bm-minecraft-vip:
+    description: 管理 bm-minecraft-vip。
+    usage: /bm-minecraft-vip [0|1|info|status|reload|give item <編號> [玩家]|give box <編號> [玩家]]
+    permission: bm-minecraft-vip.admin
+
+permissions:
+  bm-minecraft-vip.use:
+    description: 允許使用 VIP 裝備的範圍挖掘與禮包取出。
+    default: true
+  bm-minecraft-vip.admin:
+    description: 允許管理 bm-minecraft-vip。
+    default: op

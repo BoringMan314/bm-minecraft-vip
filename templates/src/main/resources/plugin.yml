@@ -1,0 +1,22 @@
+name: bm-minecraft-${feature}
+version: "26.3_0.0.1"
+main: bm.minecraft.${feature}.BmMinecraft${className}Plugin
+api-version: '26.3'
+description: "${繁體中文插件說明}"
+authors:
+  - "[B.M] 圓周率™3.14"
+website: "http://exnormal.com:81/"
+
+commands:
+  bm-minecraft-${feature}:
+    description: 管理 bm-minecraft-${feature}。
+    usage: /bm-minecraft-${feature} [0|1|info|status|reload]
+    permission: bm-minecraft-${feature}.admin
+
+permissions:
+  bm-minecraft-${feature}.use:
+    description: 允許使用 bm-minecraft-${feature} 功能。
+    default: true
+  bm-minecraft-${feature}.admin:
+    description: 允許管理 bm-minecraft-${feature}。
+    default: op
