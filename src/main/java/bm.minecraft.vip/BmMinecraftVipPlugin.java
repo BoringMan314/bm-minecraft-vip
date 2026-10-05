@@ -28,6 +28,7 @@ public final class BmMinecraftVipPlugin extends JavaPlugin {
         languageManager = new BmMinecraftVipLanguageManager(this);
         languageManager.reload();
         ensureResource("config-item.yml");
+        ensureResource("config-op-item.yml");
         ensureResource("config-box.yml");
         ensureResource("config-join.yml");
         catalog = new BmMinecraftVipCatalog(this);
@@ -54,9 +55,7 @@ public final class BmMinecraftVipPlugin extends JavaPlugin {
             expiryTask.cancel();
             expiryTask = null;
         }
-        if (listener != null && items != null) {
-            listener.revertLoadedItems();
-        }
+        // Disabling also happens during normal shutdown. Persist VIP metadata intact.
         if (languageManager != null) {
             getLogger().info(languageManager.getConsole("disabled"));
         }
@@ -102,6 +101,7 @@ public final class BmMinecraftVipPlugin extends JavaPlugin {
         reloadConfig();
         languageManager.reload();
         ensureResource("config-item.yml");
+        ensureResource("config-op-item.yml");
         ensureResource("config-box.yml");
         ensureResource("config-join.yml");
         catalog.load();

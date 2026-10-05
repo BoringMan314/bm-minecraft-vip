@@ -2,7 +2,7 @@
 # base：插件移除後留下的物品材質。appearance：外觀材質，只套用物品模型。
 # time：permanent（永久）、30d 或 30天（第一次挖方塊後開始倒數）、2026/10/10（第一次使用後開始，台北時間當天結束前有效）。
 # durability：最大耐久，會寫進說明，並真的會消耗。
-# function.type=face：不管挖到哪一面，都只挖那一面的一層。size 是邊長，必須是正奇數，3 代表 3×3×1，挖到的那格在正中心。
+# function.type=face：size 是正奇數邊長，depth 是向內深度（1～100，省略為 1），挖到的那格在起始面正中心。
 # 也可改寫 range 當半徑；1 同樣是 3×3×1。size 與 range 同時存在時採用 size。
 # function.type=forward：挖到的那格是底邊正中，沿玩家面向往前鋪一層平面。width 是左右，depth 是往前，都必須是正奇數。
 # 3 與 3 代表往前的 3×3，只有一層。
@@ -54,7 +54,7 @@ items:
       width: 3
       depth: 3
   "0004":
-    name: "永久VIP獄髓頭盔"
+    name: "永久-VIP獄髓頭盔"
     base: NETHERITE_HELMET
     appearance: NETHERITE_HELMET
     time: permanent
@@ -68,7 +68,7 @@ items:
     function:
       type: none
   "0005":
-    name: "永久VIP獄髓胸甲"
+    name: "永久-VIP獄髓胸甲"
     base: NETHERITE_CHESTPLATE
     appearance: NETHERITE_CHESTPLATE
     time: permanent
@@ -80,7 +80,7 @@ items:
     function:
       type: none
   "0006":
-    name: "永久VIP獄髓護腿"
+    name: "永久-VIP獄髓護腿"
     base: NETHERITE_LEGGINGS
     appearance: NETHERITE_LEGGINGS
     time: permanent
@@ -92,7 +92,7 @@ items:
     function:
       type: none
   "0007":
-    name: "永久VIP獄髓靴子"
+    name: "永久-VIP獄髓靴子"
     base: NETHERITE_BOOTS
     appearance: NETHERITE_BOOTS
     time: permanent
@@ -337,3 +337,55 @@ items:
       type: forward
       width: 3
       depth: 3
+  "0025":
+    name: "30天-鐵頭盔"
+    base: IRON_HELMET
+    appearance: IRON_HELMET
+    time: 30d
+    durability: 165
+    enchants:
+      RESPIRATION: 3
+      AQUA_AFFINITY: 1
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0026":
+    name: "30天-鐵胸甲"
+    base: IRON_CHESTPLATE
+    appearance: IRON_CHESTPLATE
+    time: 30d
+    durability: 240
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0027":
+    name: "30天-鐵護腿"
+    base: IRON_LEGGINGS
+    appearance: IRON_LEGGINGS
+    time: 30d
+    durability: 225
+    enchants:
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none
+  "0028":
+    name: "30天-鐵靴子"
+    base: IRON_BOOTS
+    appearance: IRON_BOOTS
+    time: 30d
+    durability: 195
+    enchants:
+      FEATHER_FALLING: 4
+      DEPTH_STRIDER: 3
+      PROTECTION: 4
+      UNBREAKING: 3
+      MENDING: 1
+    function:
+      type: none

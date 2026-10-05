@@ -10,34 +10,14 @@ enabled: true
 
 packs:
   "J0001":
-    name: "新手禮包"
+    name: "30天-新手禮包"
     appearance: BUNDLE
     time: 30d
     contents:
-      - material: IRON_HELMET
-        enchants:
-          RESPIRATION: 3
-          AQUA_AFFINITY: 1
-          PROTECTION: 4
-          UNBREAKING: 3
-          MENDING: 1
-      - material: IRON_CHESTPLATE
-        enchants:
-          PROTECTION: 4
-          UNBREAKING: 3
-          MENDING: 1
-      - material: IRON_LEGGINGS
-        enchants:
-          PROTECTION: 4
-          UNBREAKING: 3
-          MENDING: 1
-      - material: IRON_BOOTS
-        enchants:
-          FEATHER_FALLING: 4
-          DEPTH_STRIDER: 3
-          PROTECTION: 4
-          UNBREAKING: 3
-          MENDING: 1
+      - item: "0025"
+      - item: "0026"
+      - item: "0027"
+      - item: "0028"
       - item: "0022"
       - item: "0023"
       - item: "0024"

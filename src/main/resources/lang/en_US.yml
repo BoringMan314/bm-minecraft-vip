@@ -73,6 +73,7 @@ messages:
   box-expired: '&a[bm-minecraft-vip] &eWarning: &f&e{name} &freached its time limit and disappeared.'
 
 lore:
+  time-pending-equip: '&7Time: &e{time} &f(starts when equipped)'
   item-name: '&6{name}'
   box-name: '&6{name}'
   time-permanent: '&7Time: &fPermanent'
@@ -82,7 +83,7 @@ lore:
   time-remaining-soon: '&7Time: &fless than &e1 &fminute remaining'
   duration-value: '{days} days'
   durability: '&7Durability: &e{current} &f/ &e{max}'
-  function-face: '&7Ability: &e{size} &f× &e{size} &f× &e1 &fon the mined face'
+  function-face: '&7Ability: &e{size} &f× &e{size} &f× &e{depth} &finward from the mined face'
   function-forward: '&7Ability: &fmined block is the near center, &e{width} &f× &e{depth} &fforward'
   box-use-bundle: '&7Take items out of the bundle'
   box-use-shulker: '&7After placing, items can only be taken out. Items cannot be put in'

@@ -34,7 +34,10 @@ public final class BmMinecraftVipCatalog {
             int size,
             int width,
             int depth,
-            Map<Enchantment, Integer> enchants) {
+            Map<Enchantment, Integer> enchants,
+            double attackDamage,
+            boolean attackNoCooldown,
+            int maxAreaBlocks) {
     }
 
     public record BoxDefinition(
@@ -57,6 +60,7 @@ public final class BmMinecraftVipCatalog {
         items.clear();
         boxes.clear();
         loadItems(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "config-item.yml")));
+        loadItems(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "config-op-item.yml")));
         loadBoxes(YamlConfiguration.loadConfiguration(new File(plugin.getDataFolder(), "config-box.yml")));
     }
 
@@ -131,21 +135,30 @@ public final class BmMinecraftVipCatalog {
             warn("invalid-item-function", id, text(entry, "function"));
             return;
         }
+        double attackDamage = entry.getDouble("attack-damage", 0);
+        boolean attackNoCooldown = entry.getBoolean("attack-no-cooldown", false);
+        int maxAreaBlocks = entry.getInt("max-area-blocks", plugin.maxAreaBlocks());
+        if (!Double.isFinite(attackDamage) || attackDamage < 0 || attackDamage > 2048
+                || maxAreaBlocks < 1 || maxAreaBlocks > 4096) {
+            warn("invalid-item-function", id, "attack-damage / max-area-blocks");
+            return;
+        }
         String type = function.getString("type", "").trim().toLowerCase(Locale.ROOT);
         Map<Enchantment, Integer> enchants = enchants(id, entry.getConfigurationSection("enchants"));
         if (type.equals("none")) {
             items.put(id, new ItemDefinition(
-                    id, name, base, appearance, durability, time, FunctionType.NONE, 0, 0, 0, enchants));
+                    id, name, base, appearance, durability, time, FunctionType.NONE, 0, 0, 0, enchants, attackDamage, attackNoCooldown, maxAreaBlocks));
             return;
         }
         if (type.equals("face")) {
             Integer size = oddSize(function);
-            if (size == null) {
+            int depth = function.getInt("depth", 1);
+            if (size == null || depth < 1 || depth > 100) {
                 warn("invalid-item-size", id, sizeText(function));
                 return;
             }
             items.put(id, new ItemDefinition(
-                    id, name, base, appearance, durability, time, FunctionType.FACE, size, 0, 0, enchants));
+                    id, name, base, appearance, durability, time, FunctionType.FACE, size, 0, depth, enchants, attackDamage, attackNoCooldown, maxAreaBlocks));
             return;
         }
         if (type.equals("forward")) {
@@ -156,7 +169,7 @@ public final class BmMinecraftVipCatalog {
                 return;
             }
             items.put(id, new ItemDefinition(
-                    id, name, base, appearance, durability, time, FunctionType.FORWARD, 0, width, depth, enchants));
+                    id, name, base, appearance, durability, time, FunctionType.FORWARD, 0, width, depth, enchants, attackDamage, attackNoCooldown, maxAreaBlocks));
             return;
         }
         warn("invalid-item-function", id, text(function, "type"));

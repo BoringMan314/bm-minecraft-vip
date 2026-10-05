@@ -1,0 +1,40 @@
+# OP 工具，使用既有管理指令發放；持有者依一般使用權限使用。
+# face.depth：由挖掘面向內的深度（含起始層），1～100。
+# max-area-blocks：此物品的範圍破壞上限，覆寫全域值；900 = 3×3×100。
+# attack-damage：主手基礎攻擊傷害（未計附魔、冷卻、暴擊與減傷），最高 2048。
+# attack-no-cooldown：以主手攻速 1024 消除蓄力減傷，基傷不含附魔；仍遵守目標無敵與減傷。
+# 斧頭採可共存附魔：絲綢與幸運擇一；鋒利、亡靈剋星、節肢剋星擇一。
+# 不加入消失詛咒。修補放最後；遊戲提示的附魔顯示順序仍由客戶端決定。
+items:
+  "op0001":
+    name: "OP絲綢鎬"
+    base: NETHERITE_PICKAXE
+    appearance: NETHERITE_PICKAXE
+    time: permanent
+    durability: 10000
+    max-area-blocks: 900
+    enchants:
+      SILK_TOUCH: 1
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: face
+      size: 3
+      depth: 100
+  "op0002":
+    name: "OP斧"
+    base: NETHERITE_AXE
+    appearance: NETHERITE_AXE
+    time: permanent
+    durability: 10000
+    attack-damage: 1000
+    attack-no-cooldown: true
+    enchants:
+      SHARPNESS: 5
+      SILK_TOUCH: 1
+      UNBREAKING: 3
+      EFFICIENCY: 5
+      MENDING: 1
+    function:
+      type: none

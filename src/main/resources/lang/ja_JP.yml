@@ -73,6 +73,7 @@ messages:
   box-expired: '&a[bm-minecraft-vip] &e警告：&f&e{name} &fは期限が来たため消えました。'
 
 lore:
+  time-pending-equip: '&7時間：&e{time} &f（装備後にカウント開始）'
   item-name: '&6{name}'
   box-name: '&6{name}'
   time-permanent: '&7時間：&f無期限'
@@ -82,7 +83,7 @@ lore:
   time-remaining-soon: '&7時間：&f残り &e1 &f分未満'
   duration-value: '{days}日'
   durability: '&7耐久：&e{current} &f/ &e{max}'
-  function-face: '&7機能：&f掘った面に沿って一層 &e{size} &f× &e{size}'
+  function-face: '&7機能：&f掘った面から奥へ &e{size} &f× &e{size} &f× &e{depth}'
   function-forward: '&7機能：&f掘ったマスを手前中央に、前方へ一層 &e{width} &f× &e{depth}'
   box-use-bundle: '&7バンドルから取り出す'
   box-use-shulker: '&7設置後はチェストから取り出すだけ。入れることはできない'

@@ -55,12 +55,11 @@ public final class BmMinecraftVipListener implements Listener {
         rewriteLoaded(true);
     }
 
-    public void revertLoadedItems() {
-        rewriteLoaded(false);
-    }
-
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
+        // Player inventories are loaded after onEnable during a normal restart.
+        rewriteInventory(event.getPlayer().getInventory(), true);
+        rewriteInventory(event.getPlayer().getEnderChest(), true);
         plugin.joins().giveIfNew(event.getPlayer());
     }
 
@@ -148,11 +147,15 @@ public final class BmMinecraftVipListener implements Listener {
             return;
         }
         BmMinecraftVipCatalog.ItemDefinition definition = plugin.catalog().item(plugin.items().id(tool));
+        // Armor starts its clock when equipped, not when held to break a block.
+        if (definition != null && definition.function() == BmMinecraftVipCatalog.FunctionType.NONE) {
+            return;
+        }
         List<Block> extras = List.of();
         if (definition != null) {
             extras = extras(player, event.getBlock(), definition);
             int total = extras.size() + 1;
-            int max = plugin.maxAreaBlocks();
+            int max = definition.maxAreaBlocks();
             if (total > max) {
                 if (warnedArea.add(definition.id())) {
                     plugin.getLogger().warning(plugin.language().format("console.area-too-large", Map.of(
@@ -407,13 +410,13 @@ public final class BmMinecraftVipListener implements Listener {
             return List.of();
         }
         if (definition.function() == BmMinecraftVipCatalog.FunctionType.FACE) {
-            return faceLayer(origin, minedFace(player, origin), definition.size());
+            return faceLayer(origin, minedFace(player, origin), definition.size(), definition.depth());
         }
         return forwardLayer(player, origin, definition.width(), definition.depth());
     }
 
-    /** One layer on the mined face. The mined block stays the center, so 3 is 3×3×1. */
-    private List<Block> faceLayer(Block origin, BlockFace face, int size) {
+    /** Extend inward from the mined face, including the origin layer. */
+    private List<Block> faceLayer(Block origin, BlockFace face, int size, int depth) {
         List<Block> blocks = new ArrayList<>();
         int radius = size / 2;
         int lockX = Math.abs(face.getModX());
@@ -432,11 +435,18 @@ public final class BmMinecraftVipListener implements Listener {
                     if (lockZ == 1 && offsetZ != 0) {
                         continue;
                     }
-                    if (offsetX == 0 && offsetY == 0 && offsetZ == 0) {
-                        continue;
+                    for (int layer = 0; layer < depth; layer++) {
+                        if (layer == 0 && offsetX == 0 && offsetY == 0 && offsetZ == 0) {
+                            continue;
+                        }
+                        int x = origin.getX() + offsetX - face.getModX() * layer;
+                        int y = origin.getY() + offsetY - face.getModY() * layer;
+                        int z = origin.getZ() + offsetZ - face.getModZ() * layer;
+                        if (y >= world.getMinHeight() && y < world.getMaxHeight()
+                                && world.isChunkLoaded(x >> 4, z >> 4)) {
+                            blocks.add(world.getBlockAt(x, y, z));
+                        }
                     }
-                    blocks.add(world.getBlockAt(
-                            origin.getX() + offsetX, origin.getY() + offsetY, origin.getZ() + offsetZ));
                 }
             }
         }

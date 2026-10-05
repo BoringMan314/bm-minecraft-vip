@@ -73,6 +73,7 @@ messages:
   box-expired: '&a[bm-minecraft-vip] &e警告：&f&e{name} &f时间已到并消失。'
 
 lore:
+  time-pending-equip: '&7时间：&e{time} &f（穿上后开始倒数）'
   item-name: '&6{name}'
   box-name: '&6{name}'
   time-permanent: '&7时间：&f永久'
@@ -82,7 +83,7 @@ lore:
   time-remaining-soon: '&7时间：&f剩余 &e不到 1 &f分'
   duration-value: '{days}天'
   durability: '&7耐久：&e{current} &f/ &e{max}'
-  function-face: '&7功能：&f依挖掘面一层 &e{size} &f× &e{size}'
+  function-face: '&7功能：&f依挖掘面 &e{size} &f× &e{size} &f× &e{depth}'
   function-forward: '&7功能：&f以挖掘格为底边正中，往前一层 &e{width} &f× &e{depth}'
   box-use-bundle: '&7从束口袋取出'
   box-use-shulker: '&7放下后仅能从箱子取出，不能放入'

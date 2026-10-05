@@ -188,9 +188,33 @@ public final class BmMinecraftVipItems {
         for (Map.Entry<org.bukkit.enchantments.Enchantment, Integer> enchant : definition.enchants().entrySet()) {
             meta.addEnchant(enchant.getKey(), enchant.getValue(), true);
         }
+        applyAttackAttributes(meta, definition);
         writeIdentity(meta, KIND_TOOL, definition.id());
         stack.setItemMeta(meta);
         return present(stack, System.currentTimeMillis());
+    }
+
+    private void applyAttackAttributes(ItemMeta meta, BmMinecraftVipCatalog.ItemDefinition definition) {
+        if (definition.attackDamage() > 0) {
+            meta.setAttributeModifiers(com.google.common.collect.ArrayListMultimap.create(
+                    definition.base().getDefaultAttributeModifiers(org.bukkit.inventory.EquipmentSlot.HAND)));
+            meta.removeAttributeModifier(org.bukkit.attribute.Attribute.ATTACK_DAMAGE);
+            meta.addAttributeModifier(org.bukkit.attribute.Attribute.ATTACK_DAMAGE,
+                    new org.bukkit.attribute.AttributeModifier(
+                            new org.bukkit.NamespacedKey(plugin, "op_attack_damage"),
+                            definition.attackDamage() - 1,
+                            org.bukkit.attribute.AttributeModifier.Operation.ADD_NUMBER,
+                            org.bukkit.inventory.EquipmentSlotGroup.MAINHAND));
+            if (definition.attackNoCooldown()) {
+                // Even the minimum half-tick cooldown sample reaches full charge at this speed.
+                meta.removeAttributeModifier(org.bukkit.attribute.Attribute.ATTACK_SPEED);
+                meta.addAttributeModifier(org.bukkit.attribute.Attribute.ATTACK_SPEED,
+                        new org.bukkit.attribute.AttributeModifier(
+                                new org.bukkit.NamespacedKey(plugin, "op_attack_speed"),
+                                1020, org.bukkit.attribute.AttributeModifier.Operation.ADD_NUMBER,
+                                org.bukkit.inventory.EquipmentSlotGroup.MAINHAND));
+            }
+        }
     }
 
     public ItemStack createBox(BmMinecraftVipCatalog.BoxDefinition definition) {
@@ -325,6 +349,14 @@ public final class BmMinecraftVipItems {
         if (!refreshPresentation) {
             return ItemUpdate.same(stack);
         }
+        // Older versions stripped presentation at shutdown but retained the cached view.
+        // Repair those items even when their timer/damage signature has not changed.
+        if (!stack.getItemMeta().hasDisplayName()) {
+            ItemStack restored = withPlugin(stack);
+            if (restored != stack) {
+                return ItemUpdate.replace(restored);
+            }
+        }
         if (viewSignature(stack, now).equals(readView(stack))) {
             return ItemUpdate.same(stack);
         }
@@ -443,6 +475,7 @@ public final class BmMinecraftVipItems {
         int spent = damageable.hasDamage() ? Math.max(0, damageable.getDamage()) : 0;
         damageable.setMaxDamage(item.durability());
         damageable.setDamage(Math.min(spent, Math.max(0, item.durability() - 1)));
+        applyAttackAttributes(meta, item);
         meta.setItemModel(item.appearance().getKey());
         meta.setDisplayName(plugin.language().format("lore.item-name", Map.of("name", item.name())));
         return true;
@@ -476,7 +509,8 @@ public final class BmMinecraftVipItems {
         if (isTool(result)) {
             BmMinecraftVipCatalog.ItemDefinition item = plugin.catalog().item(id(result));
             if (item != null) {
-                meta.setItemModel(item.appearance().getKey());
+                applyAttackAttributes(meta, item);
+        meta.setItemModel(item.appearance().getKey());
             }
         }
         meta.getPersistentDataContainer().set(
@@ -491,7 +525,11 @@ public final class BmMinecraftVipItems {
             return null;
         }
         List<String> lore = new ArrayList<>();
-        lore.add(timeLine(stack, item.time(), now));
+        boolean armor = item.function() == BmMinecraftVipCatalog.FunctionType.NONE;
+        if (!armor || !item.time().isPermanent()) {
+            lore.add(timeLine(stack, item.time(), now,
+                    armor ? "lore.time-pending-equip" : "lore.time-pending"));
+        }
         lore.add(durabilityLine(stack, item.durability()));
         String function = functionLine(item);
         if (!function.isEmpty()) {
@@ -852,7 +890,8 @@ public final class BmMinecraftVipItems {
         }
         if (item.function() == BmMinecraftVipCatalog.FunctionType.FACE) {
             return plugin.language().format("lore.function-face", Map.of(
-                    "size", Integer.toString(item.size())));
+                    "size", Integer.toString(item.size()),
+                    "depth", Integer.toString(item.depth())));
         }
         return plugin.language().format("lore.function-forward", Map.of(
                 "width", Integer.toString(item.width()),
